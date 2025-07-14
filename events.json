@@ -140,5 +140,187 @@
       { "id": "r_61_memories", "title": "Mirando Atrás", "description": "Pasas una tarde viendo viejas fotografías. Recuerdos de toda una vida pasan ante tus ojos.", "choices": [{ "text": "Sonreír con nostalgia", "effects": { "happiness": 15 } }, { "text": "Sentir el peso de los años", "effects": { "happiness": -10 } }] }
     ]
   },
-  "fallbackEvent": { "id": "fallback", "title": "Un Semestre Tranquilo", "description": "Este semestre pasa sin grandes sobresaltos. La vida sigue su curso.", "choices": [{ "text": "Agradecer la calma", "effects": { "health": 2 } }, { "text": "Sentir un poco de aburrimiento", "effects": { "happiness": -2 } }] }
+  "fallbackEvent": { "id": "fallback", "title": "Un Semestre Tranquilo", "description": "Este semestre pasa sin grandes sobresaltos. La vida sigue su curso.", "choices": [{ "text": "Agradecer la calma", "effects": { "health": 2 } }, { "text": "Sentir un poco de aburrimiento", "effects": { "happiness": -2 } }] },
+  "endings": [
+    {
+      "id": "ending_death_health",
+      "title": "Muerte Prematura",
+      "description": "Tu salud llegó a cero antes de tiempo. Tu historia termina abruptamente, dejando un vacío en los que te querían.",
+      "condition": "p => !p.isAlive && p.happiness > 0"
+    },
+    {
+      "id": "ending_death_sadness",
+      "title": "Muerte en Soledad",
+      "description": "La tristeza fue una compañera constante. Tu corazón, simplemente, dejó de latir. Moriste en soledad.",
+      "condition": "p => !p.isAlive && p.happiness <= 0"
+    },
+    {
+      "id": "ending_perfect",
+      "title": "Una Vida Plena",
+      "description": "Lo lograste. Equilibrio perfecto entre carrera, amigos y amor. Te vas de este mundo con una sonrisa, rodeado de una familia que te adora y sin arrepentimientos. Eres una leyenda.",
+      "condition": "p => p.age >= 80 && p.happiness >= 90 && p.popularity >= 80 && p.grades >= 90 && p.partner"
+    },
+    {
+      "id": "ending_genius",
+      "title": "El Erudito Solitario",
+      "description": "Sacrificaste tu vida social por los libros y el trabajo. Mueres como una eminencia en tu campo, pero en la más profunda soledad.",
+      "condition": "p => p.age >= 80 && p.grades >= 95 && p.popularity <= 30"
+    },
+    {
+      "id": "ending_popular",
+      "title": "El Alma de la Fiesta",
+      "description": "Fuiste el alma de todas las fiestas. Todos conocían tu nombre. Sin embargo, tus excesos te pasaron factura. Mueres recordando los buenos tiempos, pero con poco más.",
+      "condition": "p => p.age >= 80 && p.popularity >= 95 && p.grades <= 40"
+    },
+    {
+      "id": "ending_true_love",
+      "title": "Amor Eterno",
+      "description": "Tu carrera no fue la más brillante y no tenías miles de amigos, pero encontraste a tu media naranja y envejeciste a su lado. Mueres en paz, sabiendo que conociste el amor verdadero.",
+      "condition": "p => p.age >= 80 && p.partner && p.happiness >= 80 && p.grades <= 50"
+    },
+    {
+      "id": "ending_heartbreaker",
+      "title": "El Magnate Solitario",
+      "description": "Tuviste éxito en todo: popularidad, carrera... pero nunca te arriesgaste en el amor. Mueres con una gran fortuna, pero con un profundo vacío a tu lado.",
+      "condition": "p => p.age >= 80 && !p.partner && p.happiness >= 80 && p.popularity >= 80 && p.grades >= 80"
+    },
+    {
+      "id": "ending_burnout",
+      "title": "Quemado por la Vida",
+      "description": "Intentaste ser el/la mejor en todo, pero la presión te superó. Llegas al final de tus días completamente agotado/a física y mentalmente.",
+      "condition": "p => p.age >= 80 && p.grades >= 85 && p.happiness <= 30"
+    },
+    {
+      "id": "ending_family",
+      "title": "El Pilar de la Familia",
+      "description": "Dedicaste tu vida a tu familia. No alcanzaste grandes cotas profesionales, pero creaste un hogar lleno de amor. Mueres rodeado de tus hijos y nietos, que te adoran.",
+      "condition": "p => p.age >= 80 && p.partner && p.happiness >= 80 && p.grades <= 60 && p.flags.hasChildren"
+    },
+    {
+      "id": "ending_regret",
+      "title": "Una Vida de Arrepentimientos",
+      "description": "Miras atrás y solo ves las oportunidades perdidas, las malas decisiones. El 'y si...' es el fantasma que te persigue en tus últimos momentos.",
+      "condition": "p => p.age >= 80 && p.happiness <= 20 && p.grades <= 40"
+    },
+    {
+      "id": "ending_health_freak",
+      "title": "El Templo del Cuerpo",
+      "description": "Tu cuerpo fue tu templo. Dietas, ejercicio, disciplina... llegas a la vejez con una salud de hierro, pero te das cuenta de que te olvidaste de nutrir el alma.",
+      "condition": "p => p.age >= 80 && p.health >= 90 && p.happiness <= 40"
+    },
+    {
+      "id": "ending_adventurer",
+      "title": "El Trotamundos",
+      "description": "Nunca echaste raíces. Tu pasaporte está lleno de sellos y tu mente de historias. No dejas una fortuna, pero sí la leyenda de una vida vivida sin miedo.",
+      "condition": "p => p.age >= 80 && p.popularity >= 80 && p.grades <= 50 && p.happiness >= 80"
+    },
+    {
+      "id": "ending_survivor",
+      "title": "El Superviviente",
+      "description": "La vida te golpeó una y otra vez. Problemas, enfermedades, tristezas... pero aquí estás, llegando al final del camino. Magullado, pero de pie. Eres más fuerte de lo que nadie jamás pensó.",
+      "condition": "p => p.age >= 80 && p.happiness <= 40 && p.grades <= 40"
+    },
+    {
+      "id": "ending_artist",
+      "title": "El Artista Incomprendido",
+      "description": "Viviste por y para tu arte. Pocos lo entendieron en vida, pero dejaste un legado de belleza que quizás las generaciones futuras sepan apreciar. Mueres pobre, pero con el alma llena.",
+      "condition": "p => p.age >= 80 && p.flags.creative && p.grades <= 50 && p.popularity <= 40"
+    },
+    {
+      "id": "ending_hermit",
+      "title": "El Ermitaño Moderno",
+      "description": "El mundo exterior era demasiado ruidoso. Encontraste la paz en tus hobbies, en tus libros, en tu pequeño rincón. Una vida tranquila, alejada de todos.",
+      "condition": "p => p.age >= 80 && p.popularity <= 20 && p.happiness >= 70"
+    },
+    {
+      "id": "ending_workaholic",
+      "title": "Adicto al Trabajo",
+      "description": "La oficina fue tu hogar; tus compañeros, tu familia. Alcanzaste la cima, pero al mirar atrás, los rostros de tus seres queridos son borrosos. Mueres en tu despacho, como siempre quisiste. ¿O no?",
+      "condition": "p => p.age >= 80 && p.grades >= 90 && p.happiness <= 40 && p.popularity <= 40"
+    },
+    {
+      "id": "ending_good_person",
+      "title": "La Buena Persona",
+      "description": "Nunca buscaste el protagonismo. Tu vida se basó en ayudar, en escuchar, en estar ahí. No sales en los periódicos, pero tu recuerdo vive en el corazón de todos a los que tocaste.",
+      "condition": "p => p.age >= 80 && p.popularity >= 70 && p.happiness >= 70 && !p.partner"
+    },
+    {
+      "id": "ending_rebel",
+      "title": "Rebelde con Causa",
+      "description": "Luchaste contra el sistema, contra las injusticias. Quizás no cambiaste el mundo, pero nunca te rendiste. Mueres fiel a tus principios, un espíritu indomable hasta el final.",
+      "condition": "p => p.age >= 80 && p.flags.rebellious && p.popularity >= 60 && p.grades <= 40"
+    },
+    {
+      "id": "ending_dependent",
+      "title": "La Sombra",
+      "description": "Tu vida giró en torno a tu pareja. Su felicidad era la tuya; sus tristezas, tus tormentas. Cuando se fue, una parte de ti se fue con ella. Nunca te recuperaste del todo.",
+      "condition": "p => p.age >= 80 && p.flags.partnerLost && p.happiness <= 50"
+    },
+    {
+      "id": "ending_lottery_winner",
+      "title": "El Millonario Accidental",
+      "description": "Un día, la suerte te sonrió. Un billete de lotería lo cambió todo. Viviste una vida de lujos y excesos. Te lo pasaste bien, pero el dinero no pudo comprarlo todo.",
+      "condition": "p => p.age >= 80 && p.flags.lotteryWinner && p.happiness >= 70 && p.grades <= 30"
+    },
+    {
+      "id": "ending_one_hit_wonder",
+      "title": "Estrella Fugaz",
+      "description": "Tuviste tu momento de gloria. Una canción, un libro, un negocio que lo petó. Saboreaste el éxito, pero se desvaneció tan rápido como llegó. El resto de tu vida fue la sombra de aquel instante.",
+      "condition": "p => p.age >= 80 && p.flags.oneHitWonder && p.grades <= 60"
+    },
+    {
+      "id": "ending_simple_life",
+      "title": "Una Vida Sencilla",
+      "description": "Rechazaste la carrera corporativa y te mudaste al campo. Una vida de trabajo físico, comida de tu huerto y atardeceres en el porche. No hay lujos, pero sí una paz que el dinero no puede comprar.",
+      "condition": "p => p.age >= 80 && p.flags.simpleLife && p.happiness >= 80 && p.health >= 70"
+    },
+    {
+      "id": "ending_scammer",
+      "title": "El Estafador",
+      "description": "Viviste del ingenio y el engaño. Siempre un paso por delante de la ley. Acumulaste una pequeña fortuna, pero nunca pudiste confiar en nadie. Mueres solo, mirando por encima del hombro.",
+      "condition": "p => p.age >= 80 && p.flags.dishonest && p.grades >= 70 && p.popularity <= 30"
+    },
+    {
+      "id": "ending_gossip",
+      "title": "El Rey/Reina del Cotilleo",
+      "description": "Tu vida fue la vida de los demás. Siempre sabías el último rumor, el último secreto. Eras el centro de atención, pero la gente te quería cerca por miedo, no por afecto.",
+      "condition": "p => p.age >= 80 && p.popularity >= 85 && p.happiness <= 50"
+    },
+    {
+      "id": "ending_jaded",
+      "title": "El Cínico",
+      "description": "Viste el mundo y no te gustó. Te encerraste en un caparazón de cinismo e ironía. Te protegió del dolor, pero también del amor y la alegría. Una vida a salvo, pero vacía.",
+      "condition": "p => p.age >= 80 && p.happiness <= 40 && p.popularity <= 40 && p.grades >= 70"
+    },
+    {
+      "id": "ending_teacher",
+      "title": "El Maestro",
+      "description": "Dedicaste tu vida a enseñar. Viste pasar a generaciones de alumnos, dejaste tu huella en cientos de mentes jóvenes. Tu legado no son millones, sino futuros.",
+      "condition": "p => p.age >= 80 && p.flags.teacher && p.grades >= 60 && p.happiness >= 70"
+    },
+    {
+      "id": "ending_politician",
+      "title": "El Servidor Público",
+      "description": "Entraste en política para cambiar las cosas. Fue una lucha constante contra la corrupción y la burocracia. No siempre ganaste, pero nunca te vendiste. Te retiras con el respeto de tu gente.",
+      "condition": "p => p.age >= 80 && p.flags.politician && p.popularity >= 70"
+    },
+    {
+      "id": "ending_athlete",
+      "title": "Vieja Gloria",
+      "description": "Tu cuerpo te dio una carrera, pero también te la quitó. Viviste la gloria de la victoria y la amargura de la lesión. El resto de tu vida fue un intento de revivir aquellos días.",
+      "condition": "p => p.age >= 80 && p.flags.athletic && p.health <= 50"
+    },
+    {
+      "id": "ending_lost_love",
+      "title": "El Amor que Pudo Ser",
+      "description": "Hubo alguien. Alguien que se te escapó. Pasaste el resto de tu vida comparando a todos con aquel fantasma, con aquel recuerdo idealizado. Mueres preguntándote 'qué habría pasado si...'.",
+      "condition": "p => p.age >= 80 && p.flags.lostLove && !p.partner && p.happiness <= 60"
+    },
+    {
+      "id": "ending_peaceful",
+      "title": "Un Final Tranquilo",
+      "description": "Has llegado al final de tu camino. Una vida larga, con sus más y sus menos. Mueres en paz, una noche, mientras duermes. Sin dramas, sin fuegos artificiales. Simplemente, un punto y final.",
+      "condition": "p => p.age >= 80"
+    }
+  ]
 }
